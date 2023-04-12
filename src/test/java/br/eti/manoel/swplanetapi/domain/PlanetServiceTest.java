@@ -3,6 +3,10 @@ package br.eti.manoel.swplanetapi.domain;
 import br.eti.manoel.swplanetapi.common.PlanetConstants;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -15,16 +19,19 @@ import static org.mockito.Mockito.when;
  * É possível indicar para carregar apenas as classes que desejamos que o teste carregue através do atributo
  * classes = {}
  */
-@SpringBootTest(classes = PlanetService.class)
+//@SpringBootTest(classes = PlanetService.class)
+@ExtendWith(MockitoExtension.class) // habilitando o mockito pro teste
 public class PlanetServiceTest {
 
-    @Autowired
+    // @Autowired
+    @InjectMocks // instancia o PlanetService e cria os mocks das dependências dele
     private PlanetService planetService;
 
     /**
      * O Repository é uma dependência do Service. Como o teste é unitário, será necessário mockar as dependências.
      */
-    @MockBean
+    // @MockBean
+    @Mock
     private PlanetRepository planetRepository;
 
     /**
